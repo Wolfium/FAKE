@@ -1,5 +1,7 @@
 // include Fake lib
 #r @"tools\FAKE\tools\FakeLib.dll"
+#r @"tools\FAKE\tools\Fake.Deploy.exe"
+#r @"tools\FAKE\tools\Fake.Deploy.Lib.dll"
 
 open Fake
 
@@ -16,13 +18,13 @@ let traceActiveReleases() =
 Target "Deploy" (fun _ ->
     !! (deployDir + "*.nupkg") 
         |> Seq.head
-        |> HttpClientHelper.PostDeploymentPackage serverUrl
+        |> FakeDeployAgentHelper.DeployPackage serverUrl
 
     traceActiveReleases()
 )
 
 Target "Rollback" (fun _ ->
-    HttpClientHelper.RollbackPackage serverUrl "Fake_Website" "HEAD~1"
+    FakeDeployAgentHelper.RollbackPackage serverUrl "Fake_Website" "HEAD~1"
 
     traceActiveReleases()
 )

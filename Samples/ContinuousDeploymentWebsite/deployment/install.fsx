@@ -1,11 +1,11 @@
 // include Fake libs
-#I @"tools\FAKE\"
+#I @"..\tools\FAKE\"
 #r "FakeLib.dll"
 
 open Fake
 
 let targetWebsitePath = @"..\website\"
-let targetServerPath = @"..\server\"
+let targetServerPath = @"..\Server\"
 
 // Targets
 Target "StopCassini" (fun _ ->
@@ -13,7 +13,7 @@ Target "StopCassini" (fun _ ->
 )
 
 Target "InstallWebsite" (fun _ ->
-    XCopy @".\website\" targetWebsitePath
+    XCopy @".\Publish\" targetWebsitePath
     XCopy @".\tools\cassini\" targetServerPath
 )
 

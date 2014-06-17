@@ -1,4 +1,5 @@
 @echo off
 cls
-"tools\FAKE\Fake.exe" install.fsx
+REM "tools\FAKE\Fake.exe" install.fsx
+"tools\FAKE\tools\Fake.exe" deployment\install.fsx
 pause
